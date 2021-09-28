@@ -49,8 +49,26 @@ async function getOperation(req, res) {
   res.status(200).json(operation);
 }
 
+async function getDbBalance() {
+  const balance = db.prepare(
+    `SELECT
+      SUM(amount)
+    FROM operations`,
+  ).get();
+  return balance;
+}
+
+/**
+ * @param {import('express').Response} res
+ */
+async function getBalance(req, res) {
+  const balance = await getDbBalance().catch((e) => console.log(e));
+  res.status(200).json(balance);
+}
+
 app.get('/operations', getAll);
 app.get('/operation/:id', getOperation);
+app.get('/balance', getBalance);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
