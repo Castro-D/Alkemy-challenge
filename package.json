@@ -23,6 +23,7 @@
     "nodemon": "^2.0.13"
   },
   "dependencies": {
+    "better-sqlite3": "^7.4.3",
     "express": "^4.17.1"
   }
 }
