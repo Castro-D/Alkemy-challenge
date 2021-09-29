@@ -70,25 +70,47 @@ async function getBalance(req, res) {
 }
 
 /**
-   * @param {import('./entity/operation')} operation
-   */
-async function createOperation(operation) {
-  const stmt = db.prepare(
-    `INSERT INTO operations (
-      concept,
-      amount,
-      date,
-      type
-    ) VALUES (?, ?, ?, ?)
-    `,
-  );
-  const result = stmt.run(
-    operation.concept,
-    operation.amount,
-    operation.date,
-    operation.type,
-  );
-  const id = result.lastInsertRowid;
+  * @param {import('./entity/operation')} operation
+  */
+async function save(operation) {
+  let id;
+  const isUpdate = operation.id;
+  if (isUpdate) {
+    id = operation.id;
+    const stmt = db.prepare(
+      `UPDATE operations SET
+      concept = ?,
+      amount = ?,
+      date = ?,
+      type = ?
+      WHERE id = ?`,
+    );
+    const params = [
+      operation.concept,
+      operation.amount,
+      operation.date,
+      operation.type,
+      operation.id,
+    ];
+    stmt.run(params);
+  } else {
+    const stmt = db.prepare(
+      `INSERT INTO operations (
+        concept,
+        amount,
+        date,
+        type
+      ) VALUES (?, ?, ?, ?)
+      `,
+    );
+    const result = stmt.run(
+      operation.concept,
+      operation.amount,
+      operation.date,
+      operation.type,
+    );
+    id = result.lastInsertRowid;
+  }
   return getRow(id);
 }
 
@@ -98,7 +120,7 @@ async function createOperation(operation) {
  */
 async function create(req, res) {
   const operation = req.body;
-  const savedOperation = await createOperation(operation).catch((e) => console.log(e));
+  const savedOperation = await save(operation).catch((e) => console.log(e));
   res.status(201).json(savedOperation);
 }
 
