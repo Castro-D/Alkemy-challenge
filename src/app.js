@@ -6,6 +6,9 @@ const port = 3000;
 
 const db = new Database('./data/database.db', { verbose: console.log });
 
+// middleware
+app.use(express.urlencoded({ extended: true }));
+
 async function getOperations() {
   const operations = db.prepare(
     `SELECT
@@ -66,9 +69,43 @@ async function getBalance(req, res) {
   res.status(200).json(balance);
 }
 
+/**
+   * @param {import('./entity/operation')} operation
+   */
+async function createOperation(operation) {
+  const stmt = db.prepare(
+    `INSERT INTO operations (
+      concept,
+      amount,
+      date,
+      type
+    ) VALUES (?, ?, ?, ?)
+    `,
+  );
+  const result = stmt.run(
+    operation.concept,
+    operation.amount,
+    operation.date,
+    operation.type,
+  );
+  const id = result.lastInsertRowid;
+  return getRow(id);
+}
+
+/**
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ */
+async function create(req, res) {
+  const operation = req.body;
+  const savedOperation = await createOperation(operation).catch((e) => console.log(e));
+  res.status(201).json(savedOperation);
+}
+
 app.get('/operations', getAll);
-app.get('/operation/:id', getOperation);
+app.get('/operations/:id', getOperation);
 app.get('/balance', getBalance);
+app.post('/operations', create);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
