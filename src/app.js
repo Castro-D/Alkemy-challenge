@@ -124,10 +124,25 @@ async function create(req, res) {
   res.status(201).json(savedOperation);
 }
 
+async function dbRemove(operation) {
+  db.prepare(
+    `DELETE FROM operations WHERE id = ?
+    `,
+  ).run(operation.id);
+}
+
+async function remove(req, res) {
+  const { id } = req.params;
+  const operation = await getRow(id).catch((e) => console.log(e));
+  await dbRemove(operation);
+  res.status(200).json({ message: `succesfuly deleted row with id ${id}` });
+}
+
 app.get('/operations', getAll);
 app.get('/operations/:id', getOperation);
 app.get('/balance', getBalance);
 app.post('/operations', create);
+app.get('/operations/delete/:id', remove);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
