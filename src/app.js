@@ -7,6 +7,7 @@ const port = 3000;
 const db = new Database('./data/database.db', { verbose: console.log });
 
 // middleware
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
 async function getOperations() {
