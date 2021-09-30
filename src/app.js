@@ -138,11 +138,11 @@ async function remove(req, res) {
   res.status(200).json({ message: `succesfuly deleted row with id ${id}` });
 }
 
-app.get('/operations', getAll);
-app.get('/operations/:id', getOperation);
-app.get('/balance', getBalance);
-app.post('/operations', create);
-app.get('/operations/delete/:id', remove);
+app.get('/api/operations', getAll);
+app.get('/api/operations/:id', getOperation);
+app.get('/api/balance', getBalance);
+app.post('/api/operations', create);
+app.get('/api/operations/delete/:id', remove);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
