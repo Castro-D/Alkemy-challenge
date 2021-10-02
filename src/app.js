@@ -71,8 +71,8 @@ async function getBalance(req, res) {
 }
 
 /**
-  * @param {import('./entity/operation')} operation
-  */
+ * @param {import('./entity/operation')} operation
+ */
 async function save(operation) {
   let id;
   const isUpdate = operation.id;
