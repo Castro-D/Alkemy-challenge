@@ -68,7 +68,7 @@ async function handleSubmit(e) {
     body: data,
   });
   const postData = await result.json();
-  alert(postData);
+  alert(`updated registry with id ${postData.id}`);
   document.location.href = '/';
 }
 
