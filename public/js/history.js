@@ -1,4 +1,6 @@
+/* eslint-disable no-restricted-syntax */
 const $tbody = document.querySelector('tbody');
+const $form = document.querySelector('#my-form');
 
 function getAll() {
   return fetch('/api/operations')
@@ -15,6 +17,7 @@ async function createRows(fetchCallback) {
       cell.appendChild(textNode);
       row.appendChild(cell);
     });
+
     const buttons = document.createElement('td');
     const editLink = document.createElement('a');
     const deleteButton = document.createElement('a');
@@ -38,7 +41,7 @@ async function createRows(fetchCallback) {
     deleteButton.addEventListener('click', () => {
       fetch(`/api/operations/delete/${operation.id}`)
         .then(() => {
-          alert(`removed operation with id ${operation.id}`);
+          alert(`deleted operation with id ${operation.id}`);
           window.location.reload();
         });
     });
@@ -52,3 +55,20 @@ async function createRows(fetchCallback) {
 }
 
 createRows(getAll);
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  const data = new URLSearchParams();
+  for (const pair of new FormData($form)) {
+    data.append(pair[0], pair[1]);
+  }
+  const result = await fetch('/api/operations', {
+    method: 'post',
+    body: data,
+  });
+  const postData = await result.json();
+  alert(postData);
+  document.location.href = '/';
+}
+
+$form.addEventListener('submit', handleSubmit);
