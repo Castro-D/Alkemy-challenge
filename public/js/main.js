@@ -13,7 +13,7 @@ function getAll() {
 
 async function setBalance(balanceCallback) {
   const data = await balanceCallback();
-  $balance.innerText = data;
+  $balance.innerText = `$${data}`;
 }
 
 async function getLastTen(dataCallback) {

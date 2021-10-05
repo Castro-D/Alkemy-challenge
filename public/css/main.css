@@ -1,0 +1,11 @@
+@media screen and (max-width: 470px) {
+  body {
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .modal-card {
+    width: 250px !important;
+  }
+}
