@@ -1,6 +1,8 @@
 /* eslint-disable no-restricted-syntax */
 const $tbody = document.querySelector('tbody');
 const $form = document.querySelector('#my-form');
+const $modalClose = document.querySelector('.delete');
+const $modal = document.querySelector('.modal');
 
 function getAll() {
   return fetch('/api/operations')
@@ -23,7 +25,6 @@ async function createRows(fetchCallback) {
     const deleteButton = document.createElement('a');
 
     editLink.addEventListener('click', () => {
-      const $modal = document.querySelector('.modal');
       const $concept = document.querySelector('#concept');
       const $id = document.querySelector('#id');
       const $amount = document.querySelector('#amount');
@@ -71,4 +72,5 @@ async function handleSubmit(e) {
   document.location.href = '/';
 }
 
+$modalClose.addEventListener('click', () => $modal.classList.toggle('is-active'));
 $form.addEventListener('submit', handleSubmit);
