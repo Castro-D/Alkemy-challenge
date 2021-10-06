@@ -25,4 +25,8 @@ module.exports = class OperationService {
   async getOperations() {
     return this.operationRepository.getOperations();
   }
+
+  async getDbBalance() {
+    return this.operationRepository.getDbBalance();
+  }
 };
