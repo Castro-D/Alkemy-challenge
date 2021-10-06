@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>History</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <div class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Edit registry</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <form id='my-form'>
+          <input type="hidden" name="id" id='id' value="" readonly />
+          <div class="field">
+            <label class="label">Concept</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Rent" name='concept' id='concept' value='' required />
+            </div>
+          </div>
+        
+          <div class="field">
+            <label class="label">Amount</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="2500" name='amount' id='amount' value='' required />
+            </div>
+          </div>
+    
+          <div class="field">
+            <label class="label">Date</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="yyyy-mm-dd" name='date' id='date' value='' required />
+            </div>
+          </div>
+    
+          <div class="field">
+            <label class="label">Type</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="income / loss" name='type' id='type' value='' required />
+            </div>
+          </div>
+          <input type="submit" class='button is-primary' value='Submit' />
+        </form>
+      </section>
+    </div>
+  </div>
+  <div class='container is-flex is-flex-direction-column is-align-items-center'>
+    <p class="title is-1 has-text-centered">History</p>
+    <table class="table is-narrow">
+      <thead>
+        <tr>
+          <th class='has-text-primary'>Id</th>
+          <th class='has-text-primary'>Concept</th>
+          <th class='has-text-primary'>Amount</th>
+          <th class='has-text-primary'>Date</th>
+          <th class='has-text-primary'>Type</th>
+          <th class='has-text-primary'>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
+  <script src="./js/history.js"></script>
+</body>
+</html>
