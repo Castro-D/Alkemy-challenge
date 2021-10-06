@@ -1,7 +1,7 @@
 const {
   default: DIContainer,
+  use,
   object,
-  get,
   factory,
 } = require('rsdi');
 
@@ -26,9 +26,9 @@ function addCommonDefinitions(container) {
  */
 function addOperationModuleDefinitions(container) {
   container.add({
-    OperationController: object(OperationController).construct(get('CarService')),
-    OperationService: object(OperationService).construct(get('OperationRepository')),
-    OperationRepository: object(OperationRepository).construct(get('DatabaseAdapter')),
+    OperationController: object(OperationController).construct(use(OperationService)),
+    OperationService: object(OperationService).construct(use(OperationRepository)),
+    OperationRepository: object(OperationRepository).construct(container.get('DatabaseAdapter')),
   });
 }
 

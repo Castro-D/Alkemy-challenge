@@ -4,7 +4,7 @@ const app = express();
 const port = 3000;
 
 const configureDependencyInjection = require('./config/di');
-const { initOperationModule } = require('./module/operation/module');
+const { init: initOperationModule } = require('./module/operation/module');
 // middleware
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
