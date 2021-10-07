@@ -21,31 +21,57 @@ module.exports = class OperationController extends AbstractController {
   }
 
   async getAll(req, res) {
-    const operations = await this.operationService.getOperations().catch((e) => console.log(e));
-    res.status(200).json(operations);
+    try {
+      const operations = await this.operationService.getOperations();
+      res.status(200).json(operations);
+    } catch (e) {
+      res.status(400).json({ message: `${e.message}` });
+    }
   }
 
   async getOperation(req, res) {
-    const { id } = req.params;
-    const operation = await this.operationService.getRow(id).catch((e) => console.log(e));
-    res.status(200).json(operation);
+    try {
+      const { id } = req.params;
+      const operation = await this.operationService.getRow(id);
+      if (operation == null) {
+        throw new Error(`Operation with id ${id} doesnt exist.`);
+      }
+      res.status(200).json(operation);
+    } catch (e) {
+      res.status(400).json({ Error: `${e.message}` });
+    }
   }
 
   async getBalance(req, res) {
-    const balance = await this.operationService.getDbBalance().catch((e) => console.log(e));
-    res.status(200).json(balance);
+    try {
+      const balance = await this.operationService.getDbBalance();
+      res.status(200).json(balance);
+    } catch (e) {
+      res.status(400).json({ Error: `${e.message}` });
+    }
   }
 
   async create(req, res) {
-    const operation = req.body;
-    const savedOperation = await this.operationService.save(operation).catch((e) => console.log(e));
-    res.status(201).json(savedOperation);
+    try {
+      const operation = req.body;
+      const savedOperation = await this.operationService.save(operation);
+      res.status(201).json(savedOperation);
+    } catch (e) {
+      res.status(400).json({ Error: `${e.message}` });
+    }
   }
 
   async remove(req, res) {
-    const { id } = req.params;
-    const operation = await this.operationService.getRow(id).catch((e) => console.log(e));
-    await this.operationService.dbRemove(operation);
-    res.status(200).json({ message: `succesfuly deleted row with id ${id}` });
+    try {
+      const { id } = req.params;
+      const operation = await this.operationService.getRow(id);
+      if (operation == null) {
+        throw new Error(`Operation with id ${id} doesnt exist.`);
+      }
+      await this.operationService.dbRemove(operation);
+      res.status(200).json({ message: `succesfuly deleted row with id ${id}` });
+    } catch (e) {
+      res.status(400).json({ Error: `${e.message}` });
+    }
   }
 };
