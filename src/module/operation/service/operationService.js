@@ -11,6 +11,10 @@ module.exports = class OperationService {
   }
 
   async save(operation) {
+    const oldRecord = this.operationRepository.getRow(operation.id);
+    if (operation.type !== oldRecord.type) {
+      throw new Error('cant change type field');
+    }
     return this.operationRepository.save(operation);
   }
 
