@@ -17,7 +17,7 @@ module.exports = class OperationController extends AbstractController {
     app.get('/api/operations/:id', this.getOperation.bind(this));
     app.get('/api/balance', this.getBalance.bind(this));
     app.post('/api/operations', this.create.bind(this));
-    app.get('/api/operations/delete/:id', this.remove.bind(this));
+    app.delete('/api/operations/delete/:id', this.remove.bind(this));
   }
 
   async getAll(req, res) {

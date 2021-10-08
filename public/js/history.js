@@ -40,7 +40,9 @@ async function createRows(fetchCallback) {
     });
 
     deleteButton.addEventListener('click', () => {
-      fetch(`/api/operations/delete/${operation.id}`)
+      fetch(`/api/operations/delete/${operation.id}`, {
+        method: 'delete',
+      })
         .then(() => {
           alert(`deleted operation with id ${operation.id}`);
           window.location.reload();
