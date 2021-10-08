@@ -17,6 +17,7 @@ module.exports = class OperationController extends AbstractController {
     app.get('/api/operations/:id', this.getOperation.bind(this));
     app.get('/api/balance', this.getBalance.bind(this));
     app.post('/api/operations', this.create.bind(this));
+    app.put('/api/operations/update', this.update.bind(this));
     app.delete('/api/operations/delete/:id', this.remove.bind(this));
   }
 
@@ -55,6 +56,16 @@ module.exports = class OperationController extends AbstractController {
     try {
       const operation = req.body;
       const savedOperation = await this.operationService.save(operation);
+      res.status(201).json(savedOperation);
+    } catch (e) {
+      res.status(400).json({ Error: `${e.message}` });
+    }
+  }
+
+  async update(req, res) {
+    try {
+      const operation = req.body;
+      const savedOperation = await this.operationService.edit(operation);
       res.status(201).json(savedOperation);
     } catch (e) {
       res.status(400).json({ Error: `${e.message}` });

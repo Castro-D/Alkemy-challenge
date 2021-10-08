@@ -65,8 +65,8 @@ async function handleSubmit(e) {
   for (const pair of new FormData($form)) {
     data.append(pair[0], pair[1]);
   }
-  const result = await fetch('/api/operations', {
-    method: 'post',
+  const result = await fetch('/api/operations/update', {
+    method: 'put',
     body: data,
   });
   const postData = await result.json();

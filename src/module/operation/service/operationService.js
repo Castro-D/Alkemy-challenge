@@ -35,4 +35,8 @@ module.exports = class OperationService {
   async getDbBalance() {
     return this.operationRepository.getDbBalance();
   }
+
+  async edit(operation) {
+    return this.operationRepository.edit(operation);
+  }
 };

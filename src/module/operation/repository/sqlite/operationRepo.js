@@ -13,44 +13,22 @@ module.exports = class OperationRepository extends AbstractOperationRepository {
    * @param {import('../../entity/operation')} operation
    */
   save(operation) {
-    let id;
-    const isUpdate = operation.id;
-    if (isUpdate) {
-      id = operation.id;
-      const stmt = this.databaseAdapter.prepare(
-        `UPDATE operations SET
-        concept = ?,
-        amount = ?,
-        date = ?,
-        type = ?
-        WHERE id = ?`,
-      );
-      const params = [
-        operation.concept,
-        operation.amount,
-        operation.date,
-        operation.type,
-        operation.id,
-      ];
-      stmt.run(params);
-    } else {
-      const stmt = this.databaseAdapter.prepare(
-        `INSERT INTO operations (
-          concept,
-          amount,
-          date,
-          type
-        ) VALUES (?, ?, ?, ?)
-        `,
-      );
-      const result = stmt.run(
-        operation.concept,
-        operation.amount,
-        operation.date,
-        operation.type,
-      );
-      id = result.lastInsertRowid;
-    }
+    const stmt = this.databaseAdapter.prepare(
+      `INSERT INTO operations (
+        concept,
+        amount,
+        date,
+        type
+      ) VALUES (?, ?, ?, ?)
+      `,
+    );
+    const result = stmt.run(
+      operation.concept,
+      operation.amount,
+      operation.date,
+      operation.type,
+    );
+    const id = result.lastInsertRowid;
     return this.getRow(id);
   }
 
@@ -97,5 +75,26 @@ module.exports = class OperationRepository extends AbstractOperationRepository {
       FROM operations`,
     ).get();
     return balance;
+  }
+
+  edit(operation) {
+    const { id } = operation;
+    const stmt = this.databaseAdapter.prepare(
+      `UPDATE operations SET
+      concept = ?,
+      amount = ?,
+      date = ?,
+      type = ?
+      WHERE id = ?`,
+    );
+    const params = [
+      operation.concept,
+      operation.amount,
+      operation.date,
+      operation.type,
+      operation.id,
+    ];
+    stmt.run(params);
+    return this.getRow(id);
   }
 };
