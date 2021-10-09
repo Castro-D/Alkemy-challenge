@@ -49,7 +49,9 @@ async function createRows(fetchCallback) {
         });
     });
     editLink.innerHTML = 'Edit';
+    editLink.classList.add('mr-2');
     deleteButton.innerHTML = 'Delete';
+    deleteButton.classList.add('has-text-danger');
 
     buttons.append(editLink, deleteButton);
     row.appendChild(buttons);
