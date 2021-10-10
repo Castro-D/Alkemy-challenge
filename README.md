@@ -15,3 +15,7 @@ Challenge full stack de Alkemy
 El proyecto se installa con ```npm install```
 
 Se Corre con ```npm run start```
+
+## Estructura de proyecto
+
+![tabla](https://user-images.githubusercontent.com/65172128/136712834-e72958d7-5636-4d64-a57f-4b598f2a7390.jpg)
