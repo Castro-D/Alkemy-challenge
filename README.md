@@ -1,3 +1,3 @@
-# Alkemy-challenge
+# Web presupuesto personal
 
-Pagina de presupuesto personal.
+Challenge full stack de Alkemy
