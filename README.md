@@ -9,3 +9,9 @@ Challenge full stack de Alkemy
 ## Diagrama
 
 ![diagram pdf drawio (1)](https://user-images.githubusercontent.com/65172128/136712301-1c258d52-8067-4844-a36b-61890e4d8485.png)
+
+## Como instalar y correr este proyecto
+
+El proyecto se installa con ```npm install```
+
+Se Corre con ```npm run start```
