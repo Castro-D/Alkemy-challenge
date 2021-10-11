@@ -31,5 +31,5 @@ Back: Nodejs, express, sqlite
 - jest
 - Sequelize ORM
 
-Son tecnologías que todavia me falta práctica, y se que son muy importantes ya que dan seguridad y escalabilidad a la aplicación.
+Son tecnologías que todavia me falta práctica, y se que son muy importantes ya que dan seguridad y escalabilidad a la aplicación (son los siguientes temas a estudiar).
 Todavía no se react, pero en el futuro lo voy a aprender ya que se que es muy usado para el front end.
