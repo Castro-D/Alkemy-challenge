@@ -25,3 +25,11 @@ Se Corre con ```npm run start```
 Front: Html, css, vanilla js, bulma css
 
 Back: Nodejs, express, sqlite
+
+## Tecnologias que me hubieran gustado aplicar
+- cypress
+- jest
+- Sequelize ORM
+
+Son tecnologías que todavia me falta práctica, y se que son muy importantes ya que dan seguridad y escalabilidad a la aplicación.
+Todavía no se react, pero en el futuro lo voy a aprender ya que se que es muy usado para el front end.
