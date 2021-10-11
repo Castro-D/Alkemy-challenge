@@ -18,7 +18,7 @@ Se Corre con ```npm run start```
 
 ## Estructura de proyecto
 
-![tabla](https://user-images.githubusercontent.com/65172128/136712834-e72958d7-5636-4d64-a57f-4b598f2a7390.jpg)
+![tabla](https://user-images.githubusercontent.com/65172128/136784856-4d025189-2f27-455d-b8ba-e95b9cfeadd7.jpg)
 
 ## proyecto realizado con las siguientes tecnologias
 
